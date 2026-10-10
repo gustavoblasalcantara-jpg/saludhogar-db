@@ -1,0 +1,89 @@
+/* ============================================================
+   SaludHogar — animations.css
+   ============================================================ */
+
+/* ---------- Scroll reveal (fade-in-up) ---------- */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.in-view{ opacity:1; transform:none; }
+
+.fade-in-up{ animation:fadeInUp .5s ease both; }
+@keyframes fadeInUp{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+
+.zoom-in{ animation:zoomIn .45s cubic-bezier(.22,1,.36,1) both; }
+@keyframes zoomIn{ from{ opacity:0; transform:scale(.92); } to{ opacity:1; transform:scale(1); } }
+
+/* ---------- Shimmer de carga (skeleton) ---------- */
+.skeleton-card .skeleton-media,
+.skeleton-line{
+  position:relative; overflow:hidden; background:#E4EAF4;
+}
+.skeleton-card .skeleton-media::after,
+.skeleton-line::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.75), transparent);
+  transform:translateX(-100%);
+  animation:shimmer 1.6s ease-in-out infinite;
+}
+@keyframes shimmer{ to{ transform:translateX(100%); } }
+
+/* ---------- Botón con brillo (shimmer border) ---------- */
+.btn-primary, .btn-blue{ position:relative; overflow:hidden; }
+.btn-primary::after, .btn-blue::after{
+  content:''; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(115deg, transparent, rgba(255,255,255,0.45), transparent);
+  transform:skewX(-20deg); transition:left .6s ease;
+}
+.btn-primary:hover::after, .btn-blue:hover::after{ left:130%; }
+
+/* ---------- Elevación 3D de tarjetas ---------- */
+.product-card{ will-change:transform; }
+
+/* ---------- Pulso sutil (CTA / indicadores en vivo) ---------- */
+@keyframes pulseGlow{
+  0%{ box-shadow:0 0 0 0 rgba(14,169,201,0.5); }
+  70%{ box-shadow:0 0 0 14px rgba(14,169,201,0); }
+  100%{ box-shadow:0 0 0 0 rgba(14,169,201,0); }
+}
+.live-dot{
+  display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--cyan);
+  animation:pulseGlow 2s infinite;
+}
+
+/* ---------- Shake (error de login) ---------- */
+@keyframes shake{
+  10%, 90%{ transform:translateX(-1px); }
+  20%, 80%{ transform:translateX(2px); }
+  30%, 50%, 70%{ transform:translateX(-4px); }
+  40%, 60%{ transform:translateX(4px); }
+}
+.shake{ animation:shake .5s ease; }
+
+/* ---------- Spinner de botón cargando ---------- */
+.is-loading{ color:transparent !important; pointer-events:none; position:relative; }
+.is-loading::before{
+  content:''; position:absolute; inset:0; margin:auto; width:18px; height:18px;
+  border:2.5px solid rgba(255,255,255,0.4); border-top-color:#fff; border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+}
+
+/* ============================================================
+   Landing pública (index.html) — keyframes movidos desde style.css
+   ============================================================ */
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none;} }
+@keyframes modalIn{ from{ opacity:0; transform: translateY(24px) scale(.98);} to{ opacity:1; transform:none; } }
+@keyframes shine{
+  0%, 60%{ left:-60%; }
+  100%{ left:130%; }
+}
+@keyframes floatIn{ from{ opacity:0; transform: translateX(40px); } to{ opacity:1; transform:none; } }
+@keyframes pulse{
+  0%{ box-shadow: 0 0 0 0 rgba(37,211,102,0.55); }
+  70%{ box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}

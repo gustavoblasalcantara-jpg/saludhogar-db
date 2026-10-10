@@ -1,0 +1,15 @@
+{
+  "name": "saludhogar-db",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SaludHogar — landing page de salud con panel de administración, analítica en tiempo real y Neon DB vía Vercel Serverless Functions.",
+  "scripts": {
+    "hash-admin": "node db/generate-admin-hash.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.0"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de administración — SaludHogar</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/images/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<header class="panel-topbar">
+  <div class="wrap">
+    <a href="panel.html" class="brand">
+      <img src="assets/images/logo-icon.svg" alt="Logo SaludHogar">
+      <span class="brand__text">Panel SaludHogar</span>
+    </a>
+    <div class="panel-user">
+      <span class="panel-user__hello">Hola,</span> <strong id="admin-name">—</strong>
+      <button type="button" class="logout-btn" id="logout-btn">Cerrar sesión</button>
+    </div>
+  </div>
+</header>
+
+<main class="panel-main">
+  <div class="wrap">
+    <h1>Métricas en tiempo real</h1>
+    <p>Datos actualizados directamente desde Neon DB a través de las funciones serverless.</p>
+
+    <div class="dash-error" id="dash-error"></div>
+
+    <!-- Skeleton mientras llega /api/stats -->
+    <div id="dash-skeleton">
+      <div class="stat-cards">
+        <div class="skeleton-stat"></div>
+        <div class="skeleton-stat"></div>
+        <div class="skeleton-stat" style="grid-column:span 2;"></div>
+      </div>
+    </div>
+
+    <!-- Contenido real (oculto hasta que cargue) -->
+    <div id="dash-content" style="display:none;">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-card__label"><span class="live-dot"></span> Visitas totales</div>
+          <div class="stat-card__value" id="stat-visitas">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Solicitudes totales</div>
+          <div class="stat-card__value" id="stat-solicitudes">0</div>
+        </div>
+        <div class="stat-card stat-card--top">
+          <div class="stat-card__label">Servicio más solicitado</div>
+          <div class="stat-card__value" id="top-nombre">—</div>
+          <div class="stat-card__sub" id="top-categoria"></div>
+          <div class="stat-card__sub" id="top-count"></div>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="panel-panel">
+          <h2>Visitas — últimos 7 días</h2>
+          <div class="visits-chart" id="visits-chart"></div>
+        </div>
+        <div class="panel-panel">
+          <h2>Ranking de servicios</h2>
+          <table class="ranking-table">
+            <thead>
+              <tr><th>#</th><th>Servicio</th><th>Categoría</th><th style="text-align:right;">Solicitudes</th></tr>
+            </thead>
+            <tbody id="ranking-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="js/admin/dashboard.js"></script>
+</body>
+</html>
